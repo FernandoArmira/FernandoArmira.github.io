@@ -1,39 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Jison / Jison - calculator</title>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fernando Armira</title>
 
-    <!-- you don't need to keep this, but it's cool for stats! -->
-    <meta name="generator" content="Nanoc 4.8.0">
-  </head>
-  <body>
-    
-    <div id="content">
-      
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
 
-      <h1>Calculator </h1>
-      <p>Enter an expression to evaluate</p>
-      <p>
-        <input type="text" value="" id="value_to_calculate" /> <button id="do_calculate">equals</button> <span id="calculated_value"></span>
-      </p>
-
-    <script src="jquery.js"></script>
-    <script src="sintactico.js"></script>
     <script>
-      $(document).ready(function () {
-        $("#do_calculate").click(function () {
-          try {
-            var result = sintactico.parse($("#value_to_calculate").val());
-            $("#calculated_value").html(result);
-          } catch (e) {
-            $("#calculated_value").html(String(e));
-          }
-        });
-      });
+        (function(){
+            const userTheme = localStorage.getItem("theme");
+
+            const darkQuery=window.matchMedia("(prefers-color-scheme: dark)");
+
+            if(userTheme==="dark" || !userTheme && darkQuery.matches){
+                setTheme("dark");
+            }
+
+            darkQuery.addEventListener("change", function(e){
+                if(!localStorage.getItem("theme")){
+                    setTheme(e.matches ? "dark" : "light");
+                }
+            });
+
+            function setTheme(newTheme){
+                document.documentElement.setAttribute("data-theme",newTheme);
+            }
+
+            window.__setUserTheme = function setUserTheme(newTheme){
+                document.documentElement.setAttribute("data-theme",newTheme);
+                localStorage.setItem("theme", newTheme)
+            }
+
+        })()
+
+        
     </script>
 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/skills.css">
+    <link rel="stylesheet" href="css/experience.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <script defer src="js/app.js"></script>
+    <script defer src="js/colorToggle.js"></script>
+</head>
+<body>
+    <header class="topheader">
+        <nav class="topnav">
+            <a href="#" class="logo">
+                <img height="50" width="50" src="https://media.istockphoto.com/id/1158342659/vector/bear-head-mascot-vector-for-emblem-design-with-color-grey.jpg?s=612x612&w=0&k=20&c=52_wgeMA5A5mS4JGuddIcnMzw7G9IRCnAalKC-jlNJY=" alt="bear">
+                <div>
+                    Fernando Armira <br>
+                    Desarrollador
+                </div>
+            </a>
+            
+            <ul class="menu">
+                <button class="close-menu" aria-label="Cerrar menú">
+                    <img src="img/close-icon.svg" alt="cerrar menú" />
+                </button>
+                <li><a href="#profile" class="selected">Perfil</a></li>
+                <li><a href="#experience">Experiencia</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+
+            <button class="dark-mode-btn" aria-label="Activar modo oscuro">
+                <img src="img/sun.svg" alt="">
+            </button>
+            <button class="light-mode-btn" aria-label="Actuvar modo claro">
+                <img src="img/moon.svg" alt="">
+            </button>
+
+            <button class="open-menu" aria-label="Abrir menu">
+
+                <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 14.5H27" stroke="currentcolor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 2H27" stroke="currentcolor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 27H27" stroke="currentcolor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                    
+            </button>
+            
+        </nav>
+    </header>
+
+    <div class="horizontal-padding vertical-padding">
+        <section class="profile" id="profile">
+            <div class="profile-info">
+                <h1 class="profile-title">Hola,  soy <br> Fernando Armira</h1>
+                <p class="profile-details">
+                    Soy un apasionado por la arquitectura y desarrollo de software, con
+                    experiencia en varios lenguajes de programación y
+                    tecnologías.
+                </p>
+                <a class="profile-btn" href="CV.pdf" download>
+                    Descargar cv
+                </a>
+            </div>
+            <span class="profile-img-section">
+                <img class="profile-img" src="https://images.squarespace-cdn.com/content/v1/546d5382e4b05a4940d58d6f/1586810271092-G254ZQDXCV0L865MCEFX/In-Charge-72x60-WEB.jpg?format=2500w" alt="bear">
+                <div class="profile-img-line"></div>
+            </span>
+        </section>
+    </div>
+
+    <section class="experiences" id="experience">
+        
+        <svg class="wave" viewBox="0 0 1400 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-15.0079 22.92C354.732 63.38 953.596 -55.05 1437.13 45.63L1400 55H6.55479e-05L-15.0079 22.92Z" fill="currentcolor"/>
+        </svg>
+
+        <div class="experiences-body">
+            <h2 class="experience-title">Experiencia</h2>
+            <div class="experiences-grid">
+                <div class="empty"></div>
+                <div class="line"></div>
+                <div class="experience">
+                    <div class="experience-date">2022-2023</div>
+                    <div class="experience-company">Claro</div>
+                    <div class="experience-position">Analista de proyectos</div>
+                    <div class="experience-description">Desarrollo de soluciones a nivel regional.
+                        Implementamos web services usando Java para el
+                        back-end y Angular en el front-end. 
+                    </div>
+                </div>
+                <div class="experience experience_left">
+                    <div class="experience-date">2015-2023</div>
+                    <div class="experience-company">Universidad de San Carlos</div>
+                    <div class="experience-position">Estudiante de Ingenieria en Ciencias y Sistemas</div>
+                    <div class="experience-description">Desarrollo de proyectos en los diversos cursos de la carrera utilizando distintos lenguajes y tecnologias. 
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="empty"></div>  
+                <div class="empty"></div>
+                <div class="line"></div>
+                <div class="experience">
+                    <div class="experience-date">2011-2013</div>
+                    <div class="experience-company">Liceo en Ciencia y Tecnologia de Occidente</div>
+                    <div class="experience-position">Bachiller Industrial y Perito en Computacion</div>
+                    <div class="experience-description">Principios de la programacion y ciencias de la computacion. 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <svg class="wave wave-bottom" viewBox="0 0 1400 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-15.0079 22.92C354.732 63.38 953.596 -55.05 1437.13 45.63L1400 55H6.55479e-05L-15.0079 22.92Z" fill="currentcolor"/>
+        </svg>
+
+    </section>
+    
+    <div class="horizontal-padding vertical-padding">
+        <section class="skills" id="skills">
+            <h2 class="skills-title">Habilidades</h2>
+            <ul class="skills-list">
+                <li class="skills-skill">CSS</li>
+                <li class="skills-skill">HTML</li>
+                <li class="skills-skill">Node.js</li>
+                <li class="skills-skill">React.js</li>
+                <li class="skills-skill">Typescript</li>
+                <li class="skills-skill">Javascript</li>
+            </ul>
+        </section>
+    </div>
+
+    <div class="horizontal-padding vertical-padding">
+        <section class="contact" id="contact">
+            <h2 class="contact-title">Contacto</h2>
+            <div class="contact-details">
+                <div class="contact-details-group">
+                    <p class="contact-label">Dirección:</p>
+                    <p class="contact-text">Chimaltenango, Guatemala</p>
+                </div>
+
+                <div class="contact-details-group">
+                    <p class="contact-label">Email:</p>
+                    <p class="contact-text">fernandoarmira20@gmail.com</p>
+                </div>
+
+                <div class="contact-details-group">
+                    <p class="contact-text">Deje su mensaje y con gusto le responderé</p>
+                  
+                </div>
+            </div>
+
+            <form class="contact-form" name="contact">
+                <div class="contact-form-group">
+                    <label for="name">Nombre</label>
+                    <input required type="text" name="name" id="name">
+                </div>
+
+                <div class="contact-form-group">
+                    <label for="email">Email</label>
+                    <input required type="email" name="email" id="email">
+                </div>
+
+                <div class="contact-form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea required name="message" id="message" rows="6"></textarea>
+                </div>
+                <button type="submit" class="contact-form-submit">Enviar</button>
+            </form>
+
+            <nav class="social">
+                <ul class="social-list">
+                    <li>
+                        <a href="https://twitter.com">
+                            <img src="img/social/twitter.svg" alt="twitter profile">
+                        </a>
+                        
+                    </li>
+
+                    <li>
+                        <a href="https://youtube.com">
+                            <img src="img/social/youtube.svg" alt="youtube profile">
+                        </a>
+                        
+                    </li>
+
+                    <li>
+                        <a href="https://github.com">
+                            <img src="img/social/github.svg" alt="github profile">
+                        </a>
+                        
+                    </li>
+
+                    <li>
+                        <a href="https://linkedincom">
+                            <img src="img/social/linkedin.svg" alt="linkedin profile">
+                        </a>
+                        
+                    </li>
+                </ul>
+            </nav>
+
+        </section>
     </div>
     
-  </body>
+
+</body>
 </html>
